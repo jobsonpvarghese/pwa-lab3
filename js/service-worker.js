@@ -11,7 +11,7 @@ self.addEventListener("fetch", e => {
 })
 
 // cache assets
-const baseURL = "https://jobsonpvarghese.github.io/pwa-lab2/"
+const baseURL = "https://jobsonpvarghese.github.io/pwa-lab3/"
 
 const cacheAssets = [
   baseURL,

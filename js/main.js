@@ -16,7 +16,7 @@ document.getElementById("add-song").addEventListener("click", () => {
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker
-      .register("./service-worker.js", { scope: "/pwa-lab2/" })
+      .register("./service-worker.js", { scope: "/pwa-lab3/" })
       .then(registration => {
         console.log("Service Worker registered: ", registration)
       })
