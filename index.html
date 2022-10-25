@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A application where you can save your favourite music playlist." />
+    <meta name="keywords" content="music, playlist, favourite, save, application" />
+    <meta name="author" content="Jobson Plavunkal Varghese" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="Music App" />
+    <meta name="theme-color" content="rgb(40, 109, 221)" />
+    <!-- Manifest -->
+    <link rel="manifest" href="./manifest.json" />
+
+    <!-- style sheet -->
+    <link rel="stylesheet" href="./style.css" />
+
+    <!-- Title -->
+    <title>Music App | Song</title>
+  </head>
+  <body class="container">
+    <!-- header with logo -->
+    <header>
+      <img src="./assets/musical-note.png" alt="" />
+      <h2>My Music App</h2>
+    </header>
+    <!-- Add song form -->
+    <div class="add-song-section">
+      <h2>New Song</h2>
+      <form action="">
+        <div class="form-input">
+          <label for="title">Title:</label>
+          <input type="text" name="title" id="title" required />
+        </div>
+        <div class="form-input"><label for="artist">Artist:</label><input type="text" name="artist" id="artist" required /></div>
+      </form>
+      <div class="alert"><h3 class="alert-content"></h3></div>
+      <div class="form-btn">
+        <button id="add-song">Add</button>
+      </div>
+    </div>
+    <!-- Song list -->
+    <div class="song-list-section">
+      <h2>Song List</h2>
+      <div class="song-container">
+        <div class="song-list">
+          <h3>Falling into you</h3>
+          <h4>Celine don</h4>
+        </div>
+      </div>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>

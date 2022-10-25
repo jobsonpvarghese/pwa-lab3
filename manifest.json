@@ -1,0 +1,26 @@
+{
+  "short_name": "Music App",
+  "name": "Music App",
+  "description": "An app for adding music to your playlist",
+  "start_url": "https://jobsonpvarghese.github.io/pwa-lab2/",
+  "scope": "/pwa-lab2/",
+  "id": "com.jobsonpvarghese.pwa-lab2",
+  "theme_color": "rgb(40, 109, 221)",
+  "background_color": "whitesmoke",
+  "orientation": "portrait",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "assets/musical-note.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/musical-note(192x192).png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
