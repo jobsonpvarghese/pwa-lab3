@@ -1,5 +1,5 @@
 // cache name
-const cacheName = "cacheAssets-v-alpha-1.0"
+const cacheName = "cacheAssets-v1-alpha-2.0"
 
 // network with cache fallback
 self.addEventListener("fetch", e => {
