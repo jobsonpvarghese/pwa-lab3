@@ -16,7 +16,7 @@ const baseURL = "https://jobsonpvarghese.github.io/pwa-lab3/"
 const cacheAssets = [
   baseURL,
   `${baseURL}index.html`,
-  `${baseURL}main.js`,
+  `${baseURL}js/main.js`,
   `${baseURL}manifest.json`,
   `${baseURL}service-worker.js`,
   `${baseURL}style.css`,
