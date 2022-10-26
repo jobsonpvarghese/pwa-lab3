@@ -1,6 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js"
 import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-firestore.js"
-import { sum } from "./firebase"
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -19,11 +18,16 @@ const app = initializeApp(firebaseConfig)
 const db = getFirestore(app)
 const dbCollection = collection(db, "playlist")
 
+/*----------------------------------------------------------
+                DOM elements
+------------------------------------------------------------*/
 var title = document.getElementById("title") // Get the title element
 var artist = document.getElementById("artist") // Get the artist element
 const alert = document.getElementsByClassName("alert") // Get the alert element
 
-// button on click event
+/*----------------------------------------------------------
+              Add song event listener
+------------------------------------------------------------*/
 document.getElementById("add-song").addEventListener("click", () => {
   // Get the value of the input fields
   var song = {
@@ -31,11 +35,13 @@ document.getElementById("add-song").addEventListener("click", () => {
     artist: artist.value,
     like: 0
   }
-
+  // Call the validation function
   validation(song)
 })
 
-// Validation function
+/*----------------------------------------------------------
+              Validation for the input fields
+------------------------------------------------------------*/
 const validation = data => {
   if (data.title && data.artist) {
     // Clear the input fields
@@ -48,7 +54,7 @@ const validation = data => {
 
     //Hiding the alert
     alert[0].style.display = "none"
-
+    // Add the data to the database if the input fields are not empty
     addDoc(dbCollection, data)
       .then(docRef => {
         console.log("Success: ", docRef?.id)
@@ -94,30 +100,9 @@ const validation = data => {
   }
 }
 
-// delete data from the database
-const deleteData = id => {
-  deleteDoc(doc(db, "playlist", id))
-    .then(() => {
-      console.log("Document successfully deleted!")
-      document.getElementById(id).remove()
-    })
-    .catch(error => {
-      console.error("Error removing document: ", error)
-    })
-}
-
-// Fetch data from the database
-const fetch = async () => {
-  console.log("Data fetched")
-  const dbCollection = collection(db, "playlist")
-  const querySnapshot = await getDocs(dbCollection)
-  querySnapshot.forEach(doc => {
-    createSongList(doc.data(), doc.id)
-  })
-}
-window.onload = fetch
-
-// create song list
+/*----------------------------------------------------------
+                Rendering the song list
+------------------------------------------------------------*/
 const createSongList = (data, id) => {
   const songContainer = document.getElementsByClassName("song-container") // Get the song container
   const songList = document.createElement("DIV") // Create a div element
@@ -142,24 +127,29 @@ const createSongList = (data, id) => {
   renderLikeButton(id, songList.querySelector(".song-list-action"), data?.like)
 }
 
+/*----------------------------------------------------------
+                Rendering the delete button
+------------------------------------------------------------*/
 function renderRemoveButton(id, elemAction) {
-  const buttonRemove = document.createElement("button")
-  buttonRemove.innerText = "Delete"
-  buttonRemove.className = "delete-btn"
-  elemAction.append(buttonRemove)
-
-  buttonRemove.addEventListener("click", () => {
+  const deleteButton = document.createElement("button")
+  deleteButton.innerText = "Delete"
+  deleteButton.className = "delete-btn"
+  elemAction.append(deleteButton)
+  deleteButton.addEventListener("click", () => {
     deleteData(id)
   })
 }
 
+/*----------------------------------------------------------
+                Rendering the like button
+------------------------------------------------------------*/
 function renderLikeButton(id, elemAction, like) {
-  const buttonRemove = document.createElement("button")
-  buttonRemove.innerText = "+1 Like"
-  buttonRemove.className = "like-btn"
-  elemAction.append(buttonRemove)
+  const likeButton = document.createElement("button")
+  likeButton.innerText = "+1 Like"
+  likeButton.className = "like-btn"
+  elemAction.append(likeButton)
   let likeCount = like
-  buttonRemove.addEventListener("click", () => {
+  likeButton.addEventListener("click", () => {
     likeCount++
     updateDoc(doc(db, "playlist", id), {
       like: likeCount
@@ -171,7 +161,37 @@ function renderLikeButton(id, elemAction, like) {
   })
 }
 
-// Register the service worker
+/*----------------------------------------------------------
+               Firebase query for data manipulation
+                1) Delete data
+                2) Get data
+------------------------------------------------------------*/
+// ------------ 1) Delete data -------------------------
+const deleteData = id => {
+  deleteDoc(doc(db, "playlist", id))
+    .then(() => {
+      console.log("Document successfully deleted!")
+      document.getElementById(id).remove()
+    })
+    .catch(error => {
+      console.error("Error removing document: ", error)
+    })
+}
+
+// ----------- 2) Get data ----------------------------
+const fetch = async () => {
+  console.log("Data fetched")
+  const dbCollection = collection(db, "playlist")
+  const querySnapshot = await getDocs(dbCollection)
+  querySnapshot.forEach(doc => {
+    createSongList(doc.data(), doc.id)
+  })
+}
+window.onload = fetch
+
+/*----------------------------------------------------------
+              Register the service worker
+------------------------------------------------------------*/
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker
@@ -184,5 +204,3 @@ if ("serviceWorker" in navigator) {
       })
   })
 }
-
-console.log(sum(1, 2))
