@@ -1,5 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js"
 import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-firestore.js"
+import { sum } from "./firebase"
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -22,7 +23,6 @@ var title = document.getElementById("title") // Get the title element
 var artist = document.getElementById("artist") // Get the artist element
 const alert = document.getElementsByClassName("alert") // Get the alert element
 
-let likeCount = 0 // Like count variable
 // button on click event
 document.getElementById("add-song").addEventListener("click", () => {
   // Get the value of the input fields
@@ -31,6 +31,7 @@ document.getElementById("add-song").addEventListener("click", () => {
     artist: artist.value,
     like: 0
   }
+
   validation(song)
 })
 
@@ -157,10 +158,9 @@ function renderLikeButton(id, elemAction, like) {
   buttonRemove.innerText = "+1 Like"
   buttonRemove.className = "like-btn"
   elemAction.append(buttonRemove)
-  likeCount = like
+  let likeCount = like
   buttonRemove.addEventListener("click", () => {
     likeCount++
-
     updateDoc(doc(db, "playlist", id), {
       like: likeCount
     }).then(() => {
@@ -184,3 +184,5 @@ if ("serviceWorker" in navigator) {
       })
   })
 }
+
+console.log(sum(1, 2))
