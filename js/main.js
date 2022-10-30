@@ -123,14 +123,14 @@ const createSongList = (data, id) => {
         <div class="song-list-action">
         </div>
     `
-  renderRemoveButton(id, songList.querySelector(".song-list-action"))
+  renderDeleteButton(id, songList.querySelector(".song-list-action"))
   renderLikeButton(id, songList.querySelector(".song-list-action"), data?.like)
 }
 
 /*----------------------------------------------------------
                 Rendering the delete button
 ------------------------------------------------------------*/
-function renderRemoveButton(id, elemAction) {
+function renderDeleteButton(id, elemAction) {
   const deleteButton = document.createElement("button")
   deleteButton.innerText = "Delete"
   deleteButton.className = "delete-btn"
