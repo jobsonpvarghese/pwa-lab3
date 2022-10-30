@@ -132,7 +132,7 @@ const createSongList = (data, id) => {
 ------------------------------------------------------------*/
 function renderDeleteButton(id, elemAction) {
   const deleteButton = document.createElement("button")
-  deleteButton.innerText = "Delete"
+  deleteButton.innerText = "Remove"
   deleteButton.className = "delete-btn"
   elemAction.append(deleteButton)
   deleteButton.addEventListener("click", () => {
